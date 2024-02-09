@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:41:30 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/08 00:17:02 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/09 22:06:18 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ class ScalarConverter {
 
 
     public:
-        
+        static int checkAscii(const std::string &tmp);
+        static int checkNan(const std::string &tmp);
         static int checkNonChars(const std::string &tmp);
         static void convert(const std::string &number);
+        static int checkInt(const std::string &tmp);
 };
