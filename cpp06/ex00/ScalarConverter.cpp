@@ -6,7 +6,7 @@
 /*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:41:39 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/11 16:59:48 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/11 18:56:28 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int ScalarConverter::checkNan(const std::string &tmp){
     return (0);
 }
 
-int ScalarConverter::checkInt(const std::string &tmp){
-    if (tmp.size() != 1)
-    {
+void ScalarConverter::checkInt(const std::string &tmp){
         if (INT_MAX < atol(tmp.c_str()) || INT_MIN > atol(tmp.c_str())){
             std::cout << "char: " << "impossible" << std::endl;
             std::cout << "int : " << "impossible" << std::endl;
@@ -79,19 +77,13 @@ int ScalarConverter::checkInt(const std::string &tmp){
             std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
             std::cout << "double: " << static_cast<double>(a) <<std::endl;
         }
-        return (1);
-    }
-    return (0);
 }
 
 int ScalarConverter::checkAscii(const std::string &tmp){
     if (tmp.size() == 1  && isascii(tmp[0]))
     {
         char a = tmp[0];
-        if (isprint(a))
-            std::cout << "char: " <<  a << std::endl;
-        else
-            std::cout << "char: " << "Non displayable" << std::endl;
+        std::cout << "char: " <<  a << std::endl;
         std::cout << "int: " << static_cast<int>(a) << std::endl;
         std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
         std::cout << "double: " << static_cast<double>(a) <<std::endl;
@@ -100,11 +92,47 @@ int ScalarConverter::checkAscii(const std::string &tmp){
     return (0);
 }
 
+int ft_isdigit(const std::string &tmp){
+    for (int i = 0; tmp[i]; i++)
+        if (!isdigit(tmp[i]))
+            return (0);
+    return (1);
+}
+
+int ft_float(const std::string &tmp){
+    int c = 0;
+
+    if (tmp.size() != 1)
+    {
+        if ((!(tmp[tmp.find('f') + 1]) && isdigit(tmp[tmp.find('f') - 1])))
+        {
+            for (int i = 0; tmp[i];i++)
+            {
+                if (tmp[i] == '.')
+                    c++;
+            }
+        }
+        if (c != 1)
+            return (0);
+        return (1);
+    }
+    return (0);
+}
 
 void ScalarConverter::convert(const std::string &number){
-    if (checkAscii(number) || checkInt(number) )
-        return;
-    else    
-        printTypes("impossible", "impossible", "impossible", "impossible");
+    if (checkNan(number))
+        return ;
+    else
+    {    
+        if (number.size() == 1 && !isdigit(number[0]))
+            checkAscii(number);
+        else if (ft_isdigit(number)) 
+            checkInt(number);
+        //else if (ft_float(number))
+
+        else
+            printTypes("impossible", "impossible", "impossible", "impossible");
+
+    }
 
 }
