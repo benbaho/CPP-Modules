@@ -6,12 +6,13 @@
 /*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:41:39 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/11 18:56:28 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/11 21:53:11 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <cstdlib>
+#include <climits>
 
 ScalarConverter::ScalarConverter(){}
 
@@ -27,23 +28,15 @@ ScalarConverter ScalarConverter::operator=(const ScalarConverter &tmp){
 
 ScalarConverter::~ScalarConverter(){}
 
-void printTypes(std::string _char, std::string _int, std::string _double, std::string _float){
-        std::cout << "char: " << _char << std::endl;
-        std::cout << "int: " << _int << std::endl;
-        std::cout << "float: " << _float << std::endl;
-        std::cout << "double: " << _double << std::endl;
-}
-
-
-
-int ScalarConverter::checkNan(const std::string &tmp){
+int ScalarConverter::checkNan(const std::string &tmp)
+{
     if (!tmp.compare("-inff") || !tmp.compare("+inff") || !tmp.compare("nanf"))
     {
         float a = atof(tmp.c_str());
         std::cout << "int : " << "impossible" << std::endl;
         std::cout << "char: " << "impossible"  << std::endl;
-        std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
-        std::cout << "double: " << static_cast<double>(a) <<std::endl;
+        std::cout << "float: " << static_cast<float>(a) <<  ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(a)<< ".0" <<std::endl;
         return (1);
     }
     if (!tmp.compare("-inf") || !tmp.compare("+inf") || !tmp.compare("nan"))
@@ -51,20 +44,20 @@ int ScalarConverter::checkNan(const std::string &tmp){
         double a = atof(tmp.c_str());
         std::cout << "char: " << "impossible"  << std::endl;
         std::cout << "int : " << "impossible" << std::endl;
-        std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
-        std::cout << "double: " << static_cast<double>(a) <<std::endl;
+        std::cout << "float: " << static_cast<float>(a) <<  ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(a) << ".0" <<std::endl;
         return (1);
     }
     return (0);
 }
 
-void ScalarConverter::checkInt(const std::string &tmp){
+void ScalarConverter::checkInt(const std::string &tmp)
+{
         if (INT_MAX < atol(tmp.c_str()) || INT_MIN > atol(tmp.c_str())){
             std::cout << "char: " << "impossible" << std::endl;
             std::cout << "int : " << "impossible" << std::endl;
-            std::cout << "float: " << static_cast<float>(atol(tmp.c_str())) <<  "f" << std::endl;
-            std::cout << "double: " << static_cast<double>(atol(tmp.c_str())) <<std::endl;
-
+            std::cout << "float: " << static_cast<float>(atol(tmp.c_str())) <<  ".0f" << std::endl;
+            std::cout << "double: " << static_cast<double>(atol(tmp.c_str()))<< ".0" <<std::endl;
         }
         else
         {
@@ -74,50 +67,86 @@ void ScalarConverter::checkInt(const std::string &tmp){
             else
                 std::cout << "char: " << "Non displayable" << std::endl;
             std::cout << "int : " << a << std::endl;
-            std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
-            std::cout << "double: " << static_cast<double>(a) <<std::endl;
+            std::cout << "float: " << static_cast<float>(a) <<  ".0f" << std::endl;
+            std::cout << "double: " << static_cast<double>(a)<< ".0" <<std::endl;
         }
 }
 
-int ScalarConverter::checkAscii(const std::string &tmp){
+void ScalarConverter::checkAscii(const std::string &tmp){
     if (tmp.size() == 1  && isascii(tmp[0]))
     {
         char a = tmp[0];
         std::cout << "char: " <<  a << std::endl;
         std::cout << "int: " << static_cast<int>(a) << std::endl;
-        std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
-        std::cout << "double: " << static_cast<double>(a) <<std::endl;
-        return (1);
+        std::cout << "float: " << static_cast<float>(a) <<  ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(a) << ".0" <<std::endl;
     }
-    return (0);
 }
 
-int ft_isdigit(const std::string &tmp){
-    for (int i = 0; tmp[i]; i++)
-        if (!isdigit(tmp[i]))
-            return (0);
-    return (1);
-}
-
-int ft_float(const std::string &tmp){
-    int c = 0;
-
-    if (tmp.size() != 1)
-    {
-        if ((!(tmp[tmp.find('f') + 1]) && isdigit(tmp[tmp.find('f') - 1])))
+void ScalarConverter::checkFloat(const std::string &tmp){
+    if (std::numeric_limits<float>::min() > atof(tmp.c_str()) || atof(tmp.c_str()) > std::numeric_limits<float>::max()){
+        std::cout << "char: " << "impossible" << std::endl;
+        std::cout << "int : " << "impossible" << std::endl;
+        std::cout << "float: " << "impossible" <<  ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(atof(tmp.c_str())) << ".0"<<std::endl;
+    }
+    else
+    {    
+        float a = atof(tmp.c_str());
+        long long b = a;
+        if (isprint(a))
+            std::cout << "char: " << static_cast<char>(a) << std::endl;
+        else
+            std::cout << "char: " << "Non displayable" << std::endl;
+        if (INT_MAX < b || INT_MIN > b)
+            std::cout << "int: " << "impossible" << std::endl;
+        else
+            std::cout << "int : " << static_cast<int>(a) << std::endl;
+        if (b - a != 0)
         {
-            for (int i = 0; tmp[i];i++)
-            {
-                if (tmp[i] == '.')
-                    c++;
-            }
+            std::cout << "float: " << a <<  "f" << std::endl;
+            std::cout << "double: " << static_cast<double>(a) <<std::endl;
         }
-        if (c != 1)
-            return (0);
-        return (1);
+        else
+        {
+            std::cout << "float: " << a <<  ".0f" << std::endl;
+            std::cout << "double: " << static_cast<double>(a) << ".0" <<std::endl;
+        }
     }
-    return (0);
 }
+
+void ScalarConverter::checkDouble(const std::string &tmp){
+     if (std::numeric_limits<double>::min() > atof(tmp.c_str()) || atof(tmp.c_str()) > std::numeric_limits<double>::max()){
+        std::cout << "char: " << "impossible" << std::endl;
+        std::cout << "int : " << "impossible" << std::endl;
+        std::cout << "float: " << "impossible" << std::endl;
+        std::cout << "double: " << "impossible" <<std::endl;
+    }
+    else
+    {    
+        double a = atof(tmp.c_str());
+        long long b = a;
+        if (isprint(a))
+            std::cout << "char: " << static_cast<char>(a) << std::endl;
+        else
+            std::cout << "char: " << "Non displayable" << std::endl;
+        if (INT_MAX < b || INT_MIN > b)
+            std::cout << "int: " << "impossible" << std::endl;
+        else
+            std::cout << "int : " << static_cast<int>(a) << std::endl;
+        if (b - a != 0)
+        {
+            std::cout << "float: " << static_cast<float>(a) <<  "f" << std::endl;
+            std::cout << "double: " << a <<std::endl;
+        }
+        else
+        {
+            std::cout << "float: " << static_cast<float>(a) <<  ".0f" << std::endl;
+            std::cout << "double: " << a << ".0" <<std::endl;
+        }
+    }
+}
+
 
 void ScalarConverter::convert(const std::string &number){
     if (checkNan(number))
@@ -128,8 +157,10 @@ void ScalarConverter::convert(const std::string &number){
             checkAscii(number);
         else if (ft_isdigit(number)) 
             checkInt(number);
-        //else if (ft_float(number))
-
+        else if (ft_float(number))
+            checkFloat(number);
+        else if (ft_double(number))
+            checkDouble(number);
         else
             printTypes("impossible", "impossible", "impossible", "impossible");
 
