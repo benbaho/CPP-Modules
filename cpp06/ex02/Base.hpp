@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:22:37 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/13 20:32:29 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:11:27 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@
 
 class Base {
     public:
-        virtual ~Base();
-          
+        virtual ~Base();      
 };

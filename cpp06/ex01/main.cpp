@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:44:07 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/13 20:09:28 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:26:00 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 int main()
 {
+    Data *ds = new Data;
+    ds->a = 42;
     
-    int c = 1;
-    int *a = &c;
-
-    float d = 1.0f;
-    float *b = &d;
-
-    b = reinterpret_cast<float*>(a);
-    std::cout << *b << std::endl;
-
+    std::cout << ds << std::endl;
+    
+    uintptr_t rawPtr = Serializer::serialize(ds);
+    
+    std::cout << rawPtr << std::endl;
+    
+    Data *tmp = NULL;
+    
+    tmp = Serializer::deserialize(rawPtr);
+    
+    std::cout << tmp << std::endl << tmp->a  << std::endl;
+    
+    delete ds;
 }
+

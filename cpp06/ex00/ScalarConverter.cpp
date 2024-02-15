@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:41:39 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/12 20:22:35 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:08:34 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <cstdlib>
 #include <climits>
 
 ScalarConverter::ScalarConverter(){}
@@ -148,7 +147,8 @@ void ScalarConverter::checkDouble(const std::string &tmp){
 }
 
 
-void ScalarConverter::convert(const std::string &number){
+void ScalarConverter::convert(const std::string &number)
+{
     if (checkNan(number))
         return ;
     else if (number.size() != 1 && (ft_search(number, '.') || ft_search(number, '-') || ft_search(number, '+') || ft_search(number, 'f') || ft_search(number, 'e') || ft_search(number, 'E'))) 

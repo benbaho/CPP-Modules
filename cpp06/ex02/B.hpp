@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   B.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:25:17 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/13 20:25:42 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:11:36 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "Base.hpp"
 
 
-class B : public Base{
-
+class B : public Base{ 
     
 };

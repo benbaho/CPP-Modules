@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Functions.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 20:51:30 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/12 20:15:21 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:49:18 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int ft_float(const std::string &tmp)
 {
     if (tmp.size() != 1)
     {
-        if ((!(tmp[tmp.find('f') + 1]) && isdigit(tmp[tmp.find('f') - 1])))
+        if ((!(tmp[tmp.find('f') + 1]) && isdigit(tmp[tmp.find('f') - 1])) &&  ((tmp.find('.') == std::string::npos) || (tmp.find('.') != std::string::npos && tmp.find('e') == std::string::npos)))
         {
             for (int i = 0; tmp[i];i++)
             {
