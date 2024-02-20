@@ -1,4 +1,4 @@
-NAME = whatever
+NAME = array
 SRCS = $(shell find . -name "*.cpp")
 COMPILER = c++ -std=c++98 -Wall -Wextra -Werror 
 
@@ -6,8 +6,8 @@ all:
 	$(COMPILER) $(SRCS) -o $(NAME)
 
 clean:
-	rm -rf whatever whatever.dSYM
+	rm -rf array array.dSYM
 	
-re: all
+re: clean all
 
 .PHONY: all clean re

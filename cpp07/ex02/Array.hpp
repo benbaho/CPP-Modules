@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 17:29:31 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/20 11:39:52 by bdurmus          ###   ########.fr       */
+/*   Created: 2024/02/20 13:13:08 by bdurmus           #+#    #+#             */
+/*   Updated: 2024/02/20 18:21:28 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 #include <iostream>
 
-template<typename T>
-void swap(T a, T b){
-    T tmp;
-    
-    tmp = b;
-    b = a;
-    a = tmp;
-}
 
 template<typename T>
-T min(T a, T b){
-    if (a < b)
-        return (a);
-    return (b);
-}
+class Array {
 
-template<typename T>
-T max(T a, T b){
-    if (a > b)
-        return (a);
-    return (b);
-}
+    private:
+        unsigned int sizeOfArray;
+        T *array;
+
+    public:
+        Array();
+        Array(unsigned int n);
+        Array(const Array &tmp);
+        Array operator=(const Array &tmp);
+        T &operator[](int location);
+        ~Array();
+
+        unsigned int size() const;
+
+
+};

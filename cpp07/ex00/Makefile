@@ -8,6 +8,6 @@ all:
 clean:
 	rm -rf whatever whatever.dSYM
 	
-re: all
+re: clean all
 
 .PHONY: all clean re

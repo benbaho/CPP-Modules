@@ -5,31 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 17:29:33 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/20 11:32:11 by bdurmus          ###   ########.fr       */
+/*   Created: 2024/02/20 11:40:47 by bdurmus           #+#    #+#             */
+/*   Updated: 2024/02/20 13:12:16 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp"
+#include "iter.hpp"
 
-int main( void ) 
-{
-    int a = 2;
-    int b = 3;
+int main() 
+{ 
+    int intArray[] = {1, 2, 3, 4, 5};
+    size_t intArrayLength = sizeof(intArray) / sizeof(intArray[0]);
 
-    ::swap( a, b );
+    std::cout << "Printing intArray elements:" << std::endl;
+    iter(intArray, intArrayLength, printElement<int>);
 
-    std::cout << "a = " << a << ", b = " << b << std::endl;
-    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-    std::string c = "chaine1";
-    std::string d = "chaine2";
+    std::string strArray[] = {"apple", "banana", "cherry"};
+    size_t strArrayLength = sizeof(strArray) / sizeof(strArray[0]);
 
-    ::swap(c, d);
-
-    std::cout << "c = " << c << ", d = " << d << std::endl;
-    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+    std::cout << "Printing strArray elements:" << std::endl;
+    iter(strArray, strArrayLength, printElement<std::string>);
 
     return 0;
 }

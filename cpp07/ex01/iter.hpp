@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 17:29:31 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/20 11:39:52 by bdurmus          ###   ########.fr       */
+/*   Created: 2024/02/20 11:40:43 by bdurmus           #+#    #+#             */
+/*   Updated: 2024/02/20 12:00:21 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,13 @@
 #include <iostream>
 
 template<typename T>
-void swap(T a, T b){
-    T tmp;
+void iter(T *adr, size_t len, void (*func)(T)){
+    for (size_t i = 0;i < len; i++)
+        func(adr[i]);
     
-    tmp = b;
-    b = a;
-    a = tmp;
 }
 
 template<typename T>
-T min(T a, T b){
-    if (a < b)
-        return (a);
-    return (b);
-}
-
-template<typename T>
-T max(T a, T b){
-    if (a > b)
-        return (a);
-    return (b);
+void printElement(T tmp){
+    std::cout << tmp << std::endl;
 }
