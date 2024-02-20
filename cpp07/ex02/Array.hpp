@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:13:08 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/20 18:21:28 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/20 20:14:21 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ template<typename T>
 class Array {
 
     private:
-        unsigned int sizeOfArray;
         T *array;
+        unsigned int sizeOfArray;
 
     public:
         Array();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:29:31 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/20 11:39:52 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:14:12 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 template<typename T>
-void swap(T a, T b){
+void swap(T &a, T &b){
     T tmp;
     
     tmp = b;
