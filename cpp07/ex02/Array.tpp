@@ -35,7 +35,7 @@ Array<T> Array<T>::operator=(const Array &tmp){
 
 template<typename T>
 Array<T>::Array(const Array &tmp) : array(new T[tmp.sizeOfArray]), sizeOfArray(tmp.size()) {
-        for (int i = 0; i < tmp.len(); i++)
+        for (unsigned int i = 0; i < tmp.size(); i++)
             array[i] = tmp.array[i];
 }
 
