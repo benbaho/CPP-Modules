@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 13:57:53 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/24 17:06:23 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:36:47 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 #include <stack>
 #include <deque>
-
+#include <list>
 
 template<typename T>
 class MutantStack : public std::stack<T> {

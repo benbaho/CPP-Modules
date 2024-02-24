@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 13:57:28 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/24 16:28:29 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:35:41 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
-#include <list>
 
 int main()
 {
@@ -35,7 +34,7 @@ int main()
     MutantStack<int>::iterator ite = mstack.end();  
     
     ++it;
-    --it;
+    --ite;
     while (it != ite)
     {
         std::cout << *it << std::endl;
@@ -63,11 +62,9 @@ int main()
 
         std::cout << "size: " << mstack2.size() << std::endl;
         
-        MutantStack<int>::iterator it = mstack2.begin();
-        MutantStack<int>::iterator ite = mstack2.end();
+        std::list<int>::iterator it = mstack2.begin();
+        std::list<int>::iterator ite = mstack2.end();
 
-        ++it;
-        --it;
         while (it != ite)
         {
             std::cout << *it << std::endl;
