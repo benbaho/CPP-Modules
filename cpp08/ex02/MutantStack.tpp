@@ -6,11 +6,13 @@
 /*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 13:57:50 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/24 18:32:19 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/25 14:10:09 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+
+#include "MutantStack.hpp"
 
 template<typename T>
 MutantStack<T>::MutantStack(){}

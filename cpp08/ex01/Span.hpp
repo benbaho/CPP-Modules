@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:39:31 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/23 20:41:40 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/25 13:59:47 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include <iterator>
+#include <vector>
+
 class Span {
     private:
         unsigned int maxSize;
