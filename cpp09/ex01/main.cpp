@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 16:52:53 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/26 14:18:22 by bdurmus          ###   ########.fr       */
+/*   Created: 2024/02/26 14:20:40 by bdurmus           #+#    #+#             */
+/*   Updated: 2024/02/26 15:08:33 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "RPN.hpp"
 
-#include <iostream>
-#include <fstream>
-#include <map>
-#include <sstream>
-
-void exec(std::string tmp);
+int main (int ac, char **av){
+    try 
+    {
+        if (ac != 2)
+            throw std::invalid_argument("Error: missing args");
+        exec(std::string(av[1]));
+    }
+    catch (std::exception &e){
+        std::cout << e.what() << std::endl;
+    }
+}
