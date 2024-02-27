@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:21:32 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/26 18:12:12 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/28 00:17:19 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 void checkForMath(std::stack<int> values, std::string tmp)
 {
+    std::stringstream ss(tmp);
+    std::string word;
     std::string operators("*-+/");
     size_t c = 0;
 
-    for (int i = 0; tmp[i]; i++)
+    while (ss >> word)
     {
-        if (operators.find(tmp[i]) != std::string::npos)
+        if (operators.find(word) != std::string::npos)
             c++;
     }
-    if (c > values.size())
+    if (c >= values.size())
         throw std::invalid_argument("Error: Numbers can not less than operators");
+    else if (c == 0)
+        throw std::invalid_argument("Error: Need a operator.");
 }
 
 void checkChars(std::string tmp)
@@ -37,34 +41,44 @@ void checkChars(std::string tmp)
     }
 }
 
-void doMath(std::stack<int> values, std::string tmp)
-{
-    for (int i = 0; tmp[i]; i++)
-    {
-        if (tmp[i] != ' ')
+void doMath(std::string tmp)
+{     
+    std::stack<int> values;
+    std::stringstream iss(tmp);
+    std::string token;
+    
+    while (iss >> token)
+    {   
+        if (isdigit(token[0]))
+            values.push(atoi(token.c_str()));
+        else 
         {
-            if (tmp[i] == '+')
-            {
+            if (values.size() < 2)
+                    throw std::invalid_argument("Error: Not enough numbers to operator.");
+                    
+            int a = values.top(); values.pop();
+            int b = values.top(); values.pop();
 
-            }
-            else if (tmp[i] == '-')
+            if (token == "+")
+                values.push(b + a);
+            else if (token == "-")
+                values.push(b - a);
+            else if (token == "*") 
+                values.push(b * a);
+            else if (token == "/") 
             {
-
+                if (a == 0)
+                    throw std::invalid_argument("Error: Undefined calculate.");
+                else
+                    values.push(b / a);
             }
-            else if (tmp[i] == '*')
-            {
-
-            }
-            else if (tmp[i] == '/')
-            {
-                
-            }
-        }
+        } 
     }
-    std::cout << values.top() << std::endl;
+    while (!values.empty()){
+        std::cout << values.top() << " ";
+        values.pop();
+    }
 }
-
-
 
 void exec(std::string arg)
 {
@@ -78,11 +92,11 @@ void exec(std::string arg)
         int num = atoi(tmp.c_str());
         if (num < 0 || num > 9)
             throw std::out_of_range("Error: Number is not in 0-9.");
-        if (num)
+        if (tmp[0] == '0' || atoi(tmp.c_str()))
             values.push(num);
     }
     if (values.size() < 2)
         throw std::invalid_argument("Error: There are not enough numbers.");
     checkForMath(values, arg);
-    doMath(values, arg);
+    doMath(arg);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 16:55:09 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/26 17:12:26 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/28 00:58:55 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,29 @@ int checkKey(std::string key)
     std::vector<std::string> tmp;
     std::stringstream number(key);
     std::string date;
+    int c = 0;
+
     while (std::getline(number, date, '-'))
         tmp.push_back(date);
 
     for (std::vector<std::string>::iterator it = tmp.begin(); it != tmp.end();it++)
     {
-        if ((*it).size() == 4){
+        c += it->size();
+        if (it->size() == 4){
             if (atoi(it->c_str()) < 0)
                 return (1);
         }
-        else if (it->size() == 2){
-            if (atoi(it->c_str()) < 1 && atoi(it->c_str()) > 31) 
+        else if (it->size() >= 2){
+            if (atoi(it->c_str()) < 1 || atoi(it->c_str()) > 31) 
+            {
+                std::cout << "Error: bad input => " << key << std::endl;
                 return (1);
+            }
         }
+        
     }
+    if (c != 8)
+        return (std::cout << "Error: bad input => " << key << std::endl, 1);
     return (0);
 }
 
