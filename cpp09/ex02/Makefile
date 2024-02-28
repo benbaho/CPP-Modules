@@ -1,4 +1,4 @@
-NAME = RPN
+NAME = PmergeMe
 SRCS = $(shell find . -name "*.cpp")
 COMPILER = c++ -std=c++98 -Wall -Wextra -Werror 
 
@@ -8,7 +8,7 @@ $(NAME):
 	$(COMPILER) $(SRCS) -o $(NAME)
 
 clean:
-	rm -rf RPN RPN.dSYM
+	rm -rf PmergeMe PmergeMe.dSYM
 	
 fclean: clean
 

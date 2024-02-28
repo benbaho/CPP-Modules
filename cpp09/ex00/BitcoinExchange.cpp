@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 16:55:09 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/28 00:58:55 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/28 20:25:10 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-void findValue(std::string key, std::string value)
+int findValue(std::string key, std::string value)
 {
     std::fstream file("data.csv", std::ios::in);
+    std::string line;
     int i = 0;
 
-    if (!file.is_open())
-        throw std::runtime_error("Error: File is not opened.");
-
+    if (!file.is_open() || getline(file,line).eof())
+    {   
+        if (file.is_open())
+            file.close();
+        return (1);
+    }
+    
     std::map<std::string, std::string> btcValues;
-    for (std::string line; std::getline(file, line);)
+    while (std::getline(file, line))
     {   
         if (i++ != 0)
             btcValues[line.substr(0, line.find(','))] = line.substr(line.find(',') + 1);
@@ -37,6 +42,7 @@ void findValue(std::string key, std::string value)
         std::cout << key << " => " << value << " = " << atof(value.c_str()) * atof(it->second.c_str()) << std::endl;
     }
     file.close();
+    return (0);
 }
 
 int checkKey(std::string key)
@@ -90,13 +96,18 @@ int checkValue(std::string value)
 void exec(std::string tmp)
 {
     std::fstream file(tmp, std::ios::in);
+    std::string line;
     int i = 0;
     
-    if (!file.is_open())
-        throw std::runtime_error("Error: File is not opened.");
+    if (!file.is_open() || getline(file, line).eof())
+    {
+        if (file.is_open())
+            file.close();
+        throw std::runtime_error("Error: Input file error.");
+    }
     else
     {
-        for (std::string line; std::getline(file, line);)
+        while (std::getline(file, line))
         {
             if (i == 0){
                 i++;
@@ -114,7 +125,13 @@ void exec(std::string tmp)
                 std::string key = line.substr(0, pos);
                 std::string value = line.substr(pos + 1);
                 if (!checkKey(key) && !checkValue(value))
-                    findValue(key, value);
+                {
+                    if (findValue(key, value))
+                    {
+                        file.close();
+                        throw std::invalid_argument("Error: Data file error.");
+                    }
+                } 
             }
             else
                 if (line.size() > 0)
