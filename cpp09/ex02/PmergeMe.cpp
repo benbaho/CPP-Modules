@@ -6,7 +6,7 @@
 /*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:11:12 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/28 20:48:47 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/29 20:44:41 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void insert(T &arr)
     {
         int temp = *it1;
         it2 = it1;
+        std::cout << *it2 << "-- " << *it1<< std::endl;
         while (it2 != arr.begin() && *(myPrev(it2)) > temp)
         {
+            std::cout << *it2 << " " << *(myPrev(it2)) << std::endl;
             *it2 = *(myPrev(it2));
             std::advance(it2, -1);
         }
@@ -117,18 +119,15 @@ void exec(char **av)
 {
     std::list<int> listNumbers;
     std::string tmp;
-    int c = 0;
     clock_t first, last;
 
     for (int i = 1; av[i]; i++)
     {
         std::stringstream ss(av[i]);
-        c = 0;
-        while (ss >> tmp)
+        for (int c = 0; ss >> tmp; c++)
         {   
             if ((tmp.size() == 1 && tmp[0] == '0') || !isdigit(tmp[c]))
                 throw std::invalid_argument("Error: There is a not allowed char.");
-            c++;
         }
         if (atol(tmp.c_str()) > INT_MAX)
             throw std::invalid_argument("Error: Out of integer range.");
@@ -144,6 +143,7 @@ void exec(char **av)
     first = clock();
     mergeInsert(listNumbers, listNumbers.begin(), listNumbers.end());
     last = clock();
+    exit(1);
     
     printNumbers(listNumbers, "After:   ");
     printTimeval(first, last, "std::list  : ", listNumbers.size());

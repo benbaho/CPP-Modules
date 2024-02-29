@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 16:55:09 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/29 00:06:45 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/29 19:13:07 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void findValue(std::string key, std::string value)
     else
     {
         it = btcValues.upper_bound(key);
-        --it;
+        it--;
         std::cout << key << " => " << value << " = " << atof(value.c_str()) * atof(it->second.c_str()) << std::endl;
     }
     file1.close();
@@ -66,18 +66,15 @@ int checkKey(std::string key)
     for (std::vector<std::string>::iterator it = tmp.begin(); it != tmp.end();it++)
     {
         c += it->size();
-        if (it->size() == 4)
+        if (it->size() >= 4)
         {
-            if (atoi(it->c_str()) < 0)
-                return (1);
+            if (atoi(it->c_str()) < 2009 || atoi(it->c_str()) > 2022)
+                return (std::cout << "Error: bad input => " << key << std::endl,1);
         }
         else if (it->size() >= 2)
         {
-            if ((atoi(it->c_str()) < 1 || atoi(it->c_str()) > 31)) 
-            {
-                std::cout << "Error: bad input => " << key << std::endl;
-                return (1);
-            }
+            if (atoi(it->c_str()) < 1 || atoi(it->c_str()) > 31 || (atoi(tmp[1].c_str()) < 1 || atoi(tmp[1].c_str()) > 12)) 
+                return(std::cout << "Error: bad input => " << key << std::endl,1);
         }
     }
     if (c != 8)

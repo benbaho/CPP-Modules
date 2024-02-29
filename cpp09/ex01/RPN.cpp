@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:21:32 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/28 00:17:19 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/29 20:02:26 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void checkForMath(std::stack<int> values, std::string tmp)
     std::string operators("*-+/");
     size_t c = 0;
 
-    while (ss >> word)
+    for (int i = 0; tmp[i]; i++)
     {
-        if (operators.find(word) != std::string::npos)
+        if (operators.find(tmp[i]) != std::string::npos)
             c++;
     }
     if (c >= values.size())
@@ -54,7 +54,7 @@ void doMath(std::string tmp)
         else 
         {
             if (values.size() < 2)
-                    throw std::invalid_argument("Error: Not enough numbers to operator.");
+                throw std::invalid_argument("Error: Not enough numbers to operator.");
                     
             int a = values.top(); values.pop();
             int b = values.top(); values.pop();
@@ -74,10 +74,16 @@ void doMath(std::string tmp)
             }
         } 
     }
+    std::stack<int> stk;
     while (!values.empty()){
-        std::cout << values.top() << " ";
+        stk.push(values.top());
         values.pop();
     }
+    while (!stk.empty())
+    {
+        std::cout << stk.top() << " ";
+        stk.pop();
+    }   
 }
 
 void exec(std::string arg)
@@ -90,7 +96,7 @@ void exec(std::string arg)
     while (forCheck >> tmp)
     {
         int num = atoi(tmp.c_str());
-        if (num < 0 || num > 9)
+        if (num < 0 || num > 9 || (tmp[0] == '-' && tmp[1] == '0'))
             throw std::out_of_range("Error: Number is not in 0-9.");
         if (tmp[0] == '0' || atoi(tmp.c_str()))
             values.push(num);
