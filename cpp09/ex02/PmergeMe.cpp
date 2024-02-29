@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdurmus <bdurmus@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: bdurmus <bdurmus@student.42kocaeli.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:11:12 by bdurmus           #+#    #+#             */
-/*   Updated: 2024/02/29 20:44:41 by bdurmus          ###   ########.fr       */
+/*   Updated: 2024/02/29 23:46:56 by bdurmus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ void insert(T &arr)
     {
         int temp = *it1;
         it2 = it1;
-        std::cout << *it2 << "-- " << *it1<< std::endl;
         while (it2 != arr.begin() && *(myPrev(it2)) > temp)
         {
-            std::cout << *it2 << " " << *(myPrev(it2)) << std::endl;
             *it2 = *(myPrev(it2));
             std::advance(it2, -1);
         }
@@ -143,7 +141,6 @@ void exec(char **av)
     first = clock();
     mergeInsert(listNumbers, listNumbers.begin(), listNumbers.end());
     last = clock();
-    exit(1);
     
     printNumbers(listNumbers, "After:   ");
     printTimeval(first, last, "std::list  : ", listNumbers.size());
