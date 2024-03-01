@@ -11,6 +11,8 @@ clean:
 	rm -rf btc btc.dSYM
 	
 fclean: clean
+	rm -rf PmergeMe.dSYM
+	
 
 re: fclean all
 
