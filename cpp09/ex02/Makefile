@@ -11,6 +11,7 @@ clean:
 	rm -rf PmergeMe PmergeMe.dSYM
 	
 fclean: clean
+	rm -rf PmergeMe.dSYM
 
 re: fclean all
 
